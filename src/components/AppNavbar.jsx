@@ -47,33 +47,22 @@ export const AppNavbar = () => {
 
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700" aria-current="page">Home</a>
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
+                  <a href="#hero-section" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700" aria-current="page">Home</a>
+                  <a href="#about-section" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
+                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Stats</a>
                   <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Projects</a>
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Links</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* {mobileMenuOpen && (
-          <div className="block transition ease-out duration-300" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-
-              <a href="#" className="block rounded-md text-slate-50 hover:bg-slate-700 px-3 py-2 text-base font-medium" aria-current="page">Home</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Projects</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">About</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Links</a>
-            </div>
-          </div>
-        )} */}
         <div className={`${mobileMenuOpen ? 'block' : 'hidden'}`} id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
 
-            <a href="#" className="block rounded-md text-slate-50 hover:bg-slate-700 px-3 py-2 text-base font-medium" aria-current="page">Home</a>
-            <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
+            <a href="#hero-section" className="block rounded-md text-slate-50 hover:bg-slate-700 px-3 py-2 text-base font-medium" aria-current="page">Home</a>
+            <a href="#about-section" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
+            <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Stats</a>
             <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Projects</a>
-            <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Links</a>
           </div>
         </div>
       </nav>
