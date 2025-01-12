@@ -1,6 +1,8 @@
 import { AppNavbar } from './components/AppNavbar'
 import { HeroSection } from './components/HeroSection'
 import { About } from './components/About'
+import { Links } from './components/Links'
+import { Projects } from './components/Projects'
 import './App.css'
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
       <AppNavbar />
       <HeroSection />
       <About />
+      <Links />
+      <Projects />
     </>
   )
 }
