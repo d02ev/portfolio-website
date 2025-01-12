@@ -1,7 +1,7 @@
 export const Links = () => {
   return (
     <>
-      <section className="bg-slate-900 text-slate-50 py-12" id="links">
+      <section className="bg-slate-900 text-slate-50 py-12" id="contact">
         <div className="container mx-auto px-6">
           <h2 className="text-center text-3xl font-bold mb-8">🌟 Let&apos;s Connect</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">

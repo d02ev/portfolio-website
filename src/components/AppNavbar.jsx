@@ -49,7 +49,7 @@ export const AppNavbar = () => {
                 <div className="flex space-x-4">
                   <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700" aria-current="page">Home</a>
                   <a href="#about" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
-                  <a href="#links" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Links</a>
+                  <a href="#contact" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Contact</a>
                   <a href="#projects" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white">Projects</a>
                 </div>
               </div>
@@ -61,7 +61,7 @@ export const AppNavbar = () => {
 
             <a href="#" className="block rounded-md text-slate-50 hover:bg-slate-700 px-3 py-2 text-base font-medium" aria-current="page">Home</a>
             <a href="#about" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 hover:text-white">About</a>
-            <a href="#links" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Links</a>
+            <a href="#contact" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Contact</a>
             <a href="#projects" className="block rounded-md px-3 py-2 text-base font-medium text-slate-50 hover:bg-slate-700 ">Projects</a>
           </div>
         </div>
