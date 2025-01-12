@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export const ProjectsTable = ({ projects }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,4 +89,18 @@ export const ProjectsTable = ({ projects }) => {
     </div>
 
   );
+};
+
+ProjectsTable.propTypes = {
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      languages: PropTypes.string.isRequired,
+      forks: PropTypes.number.isRequired,
+      stars: PropTypes.number.isRequired,
+      watchers: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
