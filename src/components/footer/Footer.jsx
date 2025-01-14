@@ -1,7 +1,7 @@
-export const Footer = () => {
+const Footer = () => {
   return (
     <>
-      <footer className="bg-slate-950 text-gray-400 py-8 px-6">
+      <footer className="bg-slate-900 text-gray-400 py-8 px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Quick Links */}
           <div className="text-center md:text-left">
@@ -65,7 +65,6 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Made with ❤️ */}
           <div className="text-center md:text-right">
             <h3 className="text-lg font-semibold text-white mb-4">💌 Made With</h3>
             <p>
@@ -78,3 +77,5 @@ export const Footer = () => {
     </>
   );
 };
+
+export default Footer;

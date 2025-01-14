@@ -1,4 +1,4 @@
-export const About = () => {
+const About = () => {
   return (
     <>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center p-6 bg-slate-950" id="about">
@@ -37,4 +37,6 @@ export const About = () => {
 
     </>
   );
-}
+};
+
+export default About;

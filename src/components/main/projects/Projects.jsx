@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { fetchRepoList } from "../utils/api.util";
-import { ProjectsTable } from "./ProjectsTable";
+import { fetchRepoList } from "../../../utils/api.util";
+import ProjectsTable  from "./ProjectsTable";
 
-export const Projects = () => {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -16,10 +16,12 @@ export const Projects = () => {
 
   return (
     <>
-      <section className="bg-slate-950 text-slate-50 py-12" id="projects">
+      <section className="bg-slate-900 text-slate-50 py-12" id="projects">
         <h2 className="text-center text-3xl font-bold mb-8">📁 My Projects</h2>
         <ProjectsTable projects={projects} />
       </section>
     </>
   );
 };
+
+export default Projects;

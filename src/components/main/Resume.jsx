@@ -1,7 +1,7 @@
-export const DownloadResume = () => {
+const Resume = () => {
   return (
     <>
-      <section className="bg-slate-900 text-white py-10 px-6" id="resume">
+      <section className="bg-slate-950 text-white py-10 px-6" id="resume">
         <h2 className="text-center text-3xl font-bold mb-6">📄 Download My Resume</h2>
         <p className="text-center text-gray-300 mb-6">
           Interested in working together? Grab a copy of my resume below! 💼
@@ -33,3 +33,5 @@ export const DownloadResume = () => {
     </>
   );
 };
+
+export default Resume;

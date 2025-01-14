@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-export const ProjectsTable = ({ projects }) => {
+const ProjectsTable = ({ projects }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 5;
 
@@ -22,7 +22,7 @@ export const ProjectsTable = ({ projects }) => {
   };
 
   return (
-    <div className="max-w-full overflow-x-auto bg-[#020617] text-white rounded-lg shadow-md p-6">
+    <div className="max-w-full overflow-x-auto bg-slate-900 text-white rounded-lg shadow-md p-6">
       <table className="min-w-full table-auto border-collapse">
         <thead>
           <tr className="bg-[#08132d]">
@@ -104,3 +104,5 @@ ProjectsTable.propTypes = {
     })
   ).isRequired,
 };
+
+export default ProjectsTable;
