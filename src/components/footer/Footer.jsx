@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <>
-      <footer className="bg-slate-900 text-gray-400 py-8 px-6">
+      <footer className="bg-slate-950 text-gray-400 py-8 px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Quick Links */}
           <div className="text-center md:text-left">
