@@ -14,7 +14,7 @@ const Navbar = () => {
                 <div className="flex space-x-4">
                   <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700" aria-current="page" title="Home"><i className="fa-solid fa-house"></i></a>
                   <a href="#about" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white" title="About"><i className="fa-solid fa-user"></i></a>
-                  <a href="#about" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white" title="Experience"><i className="fa-solid fa-briefcase"></i></a>
+                  <a href="#experience" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white" title="Experience"><i className="fa-solid fa-briefcase"></i></a>
                   <a href="#contact" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white" title="Contact"><i className="fa-solid fa-address-book"></i></a>
                   <a href="#projects" className="rounded-md px-3 py-2 text-sm font-medium text-slate-50 hover:bg-slate-700 hover:text-white" title="Projects"><i className="fa-solid fa-folder"></i></a>
                 </div>

@@ -95,7 +95,7 @@ ProjectsTable.propTypes = {
   projects: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      description: PropTypes.string,
       languages: PropTypes.string.isRequired,
       forks: PropTypes.number.isRequired,
       stars: PropTypes.number.isRequired,
