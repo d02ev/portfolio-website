@@ -1,52 +1,73 @@
 const Links = () => {
   return (
     <>
-      <section className="bg-slate-950 text-slate-50 py-12" id="contact">
+      <section className="py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" id="contact">
         <div className="container mx-auto px-6">
-          <h2 className="text-center text-3xl font-bold mb-8">🌟 Let&apos;s Connect</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-          
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">🌟 Let's Connect</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            <p className="text-slate-300 text-lg mt-6 max-w-2xl mx-auto">
+              Feel free to reach out! I'm always open to discussing new opportunities, collaborations, or just having a chat about technology.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <a
               href="https://linkedin.com/in/vikramaditya-pratap-singh"
               target="_blank"
-              className="flex flex-col items-center text-center p-6 bg-gray-800 rounded-lg hover:bg-blue-600 transition duration-300"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden glass rounded-2xl p-8 text-center hover-lift transition-all duration-300 border border-slate-700/30"
             >
-              <div className="text-4xl mb-3">
-                <i className="fab fa-linkedin"></i>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-blue-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
+                  <i className="fab fa-linkedin"></i>
+                </div>
+                <span className="font-semibold text-slate-200 group-hover:text-white transition-colors duration-300">LinkedIn</span>
               </div>
-              <span className="font-medium">LinkedIn</span>
             </a>
-            
+
             <a
               href="https://github.com/d02ev"
               target="_blank"
-              className="flex flex-col items-center text-center p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-300"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden glass rounded-2xl p-8 text-center hover-lift transition-all duration-300 border border-slate-700/30"
             >
-              <div className="text-4xl mb-3">
-                <i className="fab fa-github"></i>
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-600/20 to-gray-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4 text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <i className="fab fa-github"></i>
+                </div>
+                <span className="font-semibold text-slate-200 group-hover:text-white transition-colors duration-300">GitHub</span>
               </div>
-              <span className="font-medium">GitHub</span>
             </a>
-           
+
             <a
               href="https://leetcode.com/u/d02ev/"
               target="_blank"
-              className="flex flex-col items-center text-center p-6 bg-gray-800 rounded-lg hover:bg-orange-500 transition duration-300"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden glass rounded-2xl p-8 text-center hover-lift transition-all duration-300 border border-slate-700/30"
             >
-              <div className="text-4xl mb-3">
-                <i className="fas fa-code"></i>
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-orange-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4 text-orange-400 group-hover:text-orange-300 transition-colors duration-300">
+                  <i className="fas fa-code"></i>
+                </div>
+                <span className="font-semibold text-slate-200 group-hover:text-white transition-colors duration-300">LeetCode</span>
               </div>
-              <span className="font-medium">Leetcode</span>
             </a>
-           
+
             <a
               href="mailto:vikramadityapratapsingh98@gmail.com"
-              className="flex flex-col items-center text-center p-6 bg-gray-800 rounded-lg hover:bg-indigo-600 transition duration-300"
+              className="group relative overflow-hidden glass rounded-2xl p-8 text-center hover-lift transition-all duration-300 border border-slate-700/30"
             >
-              <div className="text-4xl mb-3">
-                <i className="fas fa-envelope"></i>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-indigo-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4 text-indigo-400 group-hover:text-indigo-300 transition-colors duration-300">
+                  <i className="fas fa-envelope"></i>
+                </div>
+                <span className="font-semibold text-slate-200 group-hover:text-white transition-colors duration-300">Email</span>
               </div>
-              <span className="font-medium">Email</span>
             </a>
           </div>
         </div>

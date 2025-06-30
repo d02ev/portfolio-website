@@ -1,40 +1,72 @@
 const About = () => {
   return (
     <>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center p-6 bg-slate-950" id="about">
-        <div className="bg-[#020617] text-gray-100 px-6 py-8 rounded-lg shadow-lg max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold text-teal-400 mb-4">👋 Hi, I&apos;m Vikramaditya Pratap Singh!</h1>
-          <p className="text-lg mb-6">
-            🚀 A passionate <span className="font-semibold text-yellow-400">Software Engineer</span> with a knack for building scalable backend systems and sleek frontend interfaces. With over 2 years of professional experience at <span className="font-semibold text-green-400">Nagarro</span>, I&apos;ve:
-          </p>
-          <ul className="list-disc list-inside mb-6 space-y-2">
-            <li>💡 Engineered REST APIs serving <span className="font-semibold">15,000+ active users</span>.</li>
-            <li>⚡ Optimized SQL queries to reduce response times by <span className="font-semibold">80%</span>.</li>
-            <li>📊 Designed custom data charts for advanced data visualization.</li>
-          </ul>
-          <h2 className="text-2xl font-semibold text-purple-400 mb-4">💻 Tech Stack Highlights:</h2>
-          <ul className="grid grid-cols-2 gap-4 mb-6">
-            <li>Languages: <span className="font-semibold">JavaScript, TypeScript, C++, C#, SQL</span></li>
-            <li>Frameworks: <span className="font-semibold">ExpressJS, .NET Core, VueJS, Angular, React</span></li>
-            <li>Databases: <span className="font-semibold">MongoDB, PostgreSQL, SQL Server</span></li>
-            <li>Tools: <span className="font-semibold">Docker, Azure Functions, Supabase</span></li>
-          </ul>
-          <p className="text-lg mb-6">
-            ✨ I love solving complex problems with algorithms and exploring innovative design patterns. Always curious, always learning and sometimes gaming 🎮 😉
-          </p>
+      <section className="py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" id="about">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">About Me</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 animate-fade-in">
+              <div className="glass rounded-2xl p-8 shadow-xl border border-slate-700/30">
+                <h3 className="text-2xl font-bold text-cyan-400 mb-4">👋 Hi, I'm Vikramaditya Pratap Singh!</h3>
+                <p className="text-slate-200 text-lg leading-relaxed mb-6">
+                  A passionate <span className="font-semibold text-yellow-400">Software Engineer</span> with a knack for building scalable backend systems and sleek frontend interfaces. With over 2+ years of professional experience at <span className="font-semibold text-green-400">Nagarro</span>, I've:
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start space-x-3">
+                    <span className="text-cyan-400 mt-1">💡</span>
+                    <span className="text-slate-200">Engineered REST APIs serving <span className="font-semibold text-cyan-300">15,000+ active users</span>.</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="text-cyan-400 mt-1">⚡</span>
+                    <span className="text-slate-200">Optimized SQL queries to reduce response times by <span className="font-semibold text-cyan-300">80%</span>.</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="text-cyan-400 mt-1">📊</span>
+                    <span className="text-slate-200">Designed custom data charts for advanced data visualization.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="glass rounded-2xl p-8 shadow-xl border border-slate-700/30">
+                <h4 className="text-xl font-semibold text-purple-400 mb-4">💻 Tech Stack Highlights:</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">Languages:</span> C/C++, C#, Python, JavaScript, TypeScript, Bash, SQL</p>
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">Frameworks:</span> ExpressJS, .NET Core, React</p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">Databases:</span> MongoDB, PostgreSQL</p>
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">Tools:</span> Docker, Azure Functions, Supabase, Git</p>
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">Cloud:</span> Azure, AWS</p>
+                    <p className="text-slate-300"><span className="font-semibold text-slate-200">AI:</span> Prompt Engineering, Vibe Coding</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass rounded-2xl p-8 shadow-xl border border-slate-700/30">
+                <p className="text-slate-200 text-lg leading-relaxed">
+                  ✨ I love solving complex problems with algorithms and exploring innovative design patterns. Always curious, always learning and sometimes gaming 🎮 😉
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-center animate-fade-in">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <img
+                  src="/pic1.jpg"
+                  alt="Vikramaditya Pratap Singh"
+                  className="relative w-80 h-80 object-cover rounded-2xl shadow-2xl hover-lift transition-all duration-300"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-
-
-        <div className="flex justify-center">
-          <img
-            src="/pic1.jpg"
-            alt="Your Image"
-            className="w-81 h-81 object-cover rounded-lg shadow-md"
-          />
-        </div>
-
       </section>
-
     </>
   );
 };
