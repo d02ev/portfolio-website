@@ -11,9 +11,9 @@ const ProjectsGrid = ({ projects }) => {
           <div>
             <h3 className="text-xl font-bold gradient-text mb-2 truncate">{project.displayName}</h3>
             <p className="text-slate-300 mb-4 min-h-[60px]">{project.description}</p>
-            {project.techStack && project.techStack.trim() && (
+            {project.techStack.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.techStack.split(',').map((stack, i) => (
+                {project.techStack.map((stack, i) => (
                   <span
                     key={i}
                     className="inline-block px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 rounded-full text-xs font-medium"

@@ -18,7 +18,7 @@ export function useExperiencesActions() {
       setError(null);
       setLoading(true);
       const res = await fetchExperiences();
-      setExperiences(res.data);
+      setExperiences(res.data.experiences);
     } catch (err) {
       setError(err?.response?.data?.message || err?.message || 'Failed to fetch experiences.');
     } finally {
