@@ -3,31 +3,31 @@ import PropTypes from 'prop-types';
 const ProjectsGrid = ({ projects }) => {
   return (
     <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project, idx) => (
+      {projects.map(project => (
         <div
-          key={idx}
+          key={project.id}
           className="glass rounded-2xl shadow-xl border border-slate-700/30 p-6 flex flex-col justify-between hover-lift transition-all duration-300 animate-fade-in"
         >
           <div>
-            <h3 className="text-xl font-bold gradient-text mb-2 truncate">{project.name}</h3>
+            <h3 className="text-xl font-bold gradient-text mb-2 truncate">{project.displayName}</h3>
             <p className="text-slate-300 mb-4 min-h-[60px]">{project.description}</p>
-            {project.languages && project.languages.trim() && (
+            {project.techStack && project.techStack.trim() && (
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.languages.split(',').map((lang, i) => (
+                {project.techStack.split(',').map((stack, i) => (
                   <span
                     key={i}
                     className="inline-block px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 rounded-full text-xs font-medium"
                   >
-                    {lang.trim()}
+                    {stack.trim()}
                   </span>
                 ))}
               </div>
             )}
           </div>
           <div className="flex items-center justify-end mt-4 gap-3">
-            {project.live && project.live.trim() && (
+            {project.liveUrl && project.liveUrl.trim() && (
               <a
-                href={project.live}
+                href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow hover:from-green-500 hover:to-blue-600 transition-all duration-300 hover-lift flex items-center justify-center"
@@ -36,9 +36,9 @@ const ProjectsGrid = ({ projects }) => {
                 <i className="fa-solid fa-globe"></i>
               </a>
             )}
-            {project.url && project.url.trim() && (
+            {project.repoUrl && project.repoUrl.trim() && (
               <a
-                href={project.url}
+                href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-lg border-2 border-cyan-400 text-cyan-300 font-semibold shadow hover:bg-cyan-500 hover:text-white transition-all duration-300 hover-lift flex items-center justify-center"
@@ -59,7 +59,7 @@ ProjectsGrid.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       description: PropTypes.string,
-      languages: PropTypes.string,
+      stackuages: PropTypes.string,
       url: PropTypes.string,
       live: PropTypes.string,
     })
