@@ -17,7 +17,7 @@ export function useProjectsActions() {
       setError(null);
       setLoading(true);
       const res = await fetchProjects();
-      setProjects(res.data.projects);
+      setProjects(res.data.data);
     } catch (err) {
       setError(err?.response?.data?.message || err?.message || 'Failed to fetch projects.');
     } finally {

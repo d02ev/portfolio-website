@@ -12,7 +12,7 @@ const ProjectsTab = () => {
     setError,
   } = useProjectsActions();
 
-  const [newProject, setNewProject] = useState({ name: '', description: '', languages: '', url: '', live: '' });
+  const [newProject, setNewProject] = useState({ name: '', description: '', techStack: '', url: '', live: '' });
   const [editProjectId, setEditProjectId] = useState(null);
   const [editProject, setEditProject] = useState({});
   const [expandedProject, setExpandedProject] = useState(null);
@@ -20,7 +20,7 @@ const ProjectsTab = () => {
   const handleAddProject = async (e) => {
     e.preventDefault();
     await addProject(newProject);
-    setNewProject({ name: '', description: '', languages: '', url: '', live: '' });
+    setNewProject({ name: '', description: '', techStack: '', url: '', live: '' });
     getProjects();
   };
   const handleUpdateProject = async (e) => {

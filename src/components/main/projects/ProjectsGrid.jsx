@@ -10,7 +10,7 @@ const ProjectsGrid = ({ projects }) => {
         >
           <div>
             <h3 className="text-xl font-bold gradient-text mb-2 truncate">{project.displayName}</h3>
-            <p className="text-slate-300 mb-4 min-h-[60px]">{project.description}</p>
+            <p className="text-slate-300 mb-4 min-h-[60px]">{project.shortDescription}</p>
             {project.techStack.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack.map((stack, i) => (
@@ -57,11 +57,11 @@ const ProjectsGrid = ({ projects }) => {
 ProjectsGrid.propTypes = {
   projects: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      stackuages: PropTypes.string,
-      url: PropTypes.string,
-      live: PropTypes.string,
+      displayName: PropTypes.string.isRequired,
+      shortDescription: PropTypes.string,
+      techStack: PropTypes.array,
+      repoUrl: PropTypes.string,
+      liveUrl: PropTypes.string,
     })
   ).isRequired,
 };
