@@ -1,8 +1,10 @@
 import { useProjectsStore } from '../../../stores/projects.store';
 import ProjectsGrid from './ProjectsGrid';
+import { useProjectsActions } from '../../../hooks/useProjectsActions.js';
 
 const Projects = () => {
   const projects = useProjectsStore((state) => state.projects);
+  const { error, loading } = useProjectsActions();
 
   return (
     <>
@@ -15,7 +17,18 @@ const Projects = () => {
               Here are some of my recent projects. Each one represents a unique challenge and learning experience.
             </p>
           </div>
-          <ProjectsGrid projects={projects} />
+          {error && (
+            <div className="mb-8 p-4 bg-red-100 text-red-700 rounded text-center">
+              Sorry, we couldn&apos;t load this section. Please try again later.
+            </div>
+          )}
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-500"></div>
+            </div>
+          ) : (
+            <ProjectsGrid projects={projects} />
+          )}
         </div>
       </section>
     </>
