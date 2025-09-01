@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL_DEV,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -11,5 +11,6 @@ const api = axios.create({
 export const fetchProjects = () => api.get('/project');
 export const fetchExperiences = () => api.get('/experience');
 export const fetchAbout = () => api.get('/about');
+export const getLatestResume = () => api.get('/resume/latest');
 
 export default api;

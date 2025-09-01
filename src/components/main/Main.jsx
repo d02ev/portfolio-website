@@ -2,6 +2,7 @@ import About from "./About";
 import Experience from "./Experience";
 import Links from "./Links";
 import Projects from "./projects/Projects";
+import ResumeDownloadSection from "./ResumeDownloadSection";
 import { useAboutActions } from '../../hooks/useAboutActions.js';
 import { useExperiencesActions } from '../../hooks/useExperiencesActions.js';
 import { useProjectsActions } from '../../hooks/useProjectsActions.js';
@@ -20,6 +21,7 @@ const Main = () => {
         <>
           <About />
           <Experience />
+          <ResumeDownloadSection />
           <Links />
           <Projects />
         </>

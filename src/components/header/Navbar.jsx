@@ -35,6 +35,13 @@ const Navbar = () => {
                     <i className="fa-solid fa-briefcase"></i>
                   </a>
                   <a
+                    href="#resume"
+                    className="rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-slate-700/50 hover:text-white transition-all duration-300 hover-lift"
+                    title="Resume"
+                  >
+                    <i className="fa-solid fa-file-pdf"></i>
+                  </a>
+                  <a
                     href="#contact"
                     className="rounded-lg px-4 py-2 text-sm font-medium text-slate-200 hover:bg-slate-700/50 hover:text-white transition-all duration-300 hover-lift"
                     title="Contact"
