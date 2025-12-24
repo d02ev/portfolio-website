@@ -11,316 +11,174 @@ const ResumeDownloadSection = ({ className = '', buttonText = 'Download Resume' 
 
   const getErrorMessage = (error) => {
     const browserCapabilities = detectBrowserCapabilities();
-    
-    // Handle API response errors
+
     if (error.response) {
       const status = error.response.status;
       switch (status) {
-        case 400:
-          return 'Invalid request. Please try again.';
-        case 401:
-          return 'Access denied. Please refresh the page and try again.';
-        case 403:
-          return 'You do not have permission to access this resource. Please refresh the page.';
-        case 404:
-          return 'Resume not found. Please contact support if this issue persists.';
-        case 408:
-          return 'Request timeout. Please check your connection and try again.';
-        case 429:
-          return 'Too many requests. Please wait a moment and try again.';
-        case 500:
-          return 'Server error. Please try again in a few minutes.';
+        case 400: return 'Invalid request. Please try again.';
+        case 401: return 'Access denied. Please refresh the page.';
+        case 403: return 'Permission denied. Please refresh the page.';
+        case 404: return 'Resume not found. Please contact support.';
+        case 408: return 'Request timeout. Please try again.';
+        case 429: return 'Too many requests. Please wait and try again.';
+        case 500: return 'Server error. Please try again later.';
         case 502:
-          return 'Service temporarily unavailable. Please try again later.';
-        case 503:
-          return 'Service maintenance in progress. Please try again later.';
-        case 504:
-          return 'Request timeout. Please try again.';
-        default:
-          return `Server error (${status}). Please try again later.`;
+        case 503: return 'Service unavailable. Please try again later.';
+        case 504: return 'Request timeout. Please try again.';
+        default: return `Error (${status}). Please try again.`;
       }
     }
-    
-    // Handle network errors with browser-specific messages
-    if (error.code === 'NETWORK_ERROR' || error.code === 'ERR_NETWORK') {
+
+    if (error.code === 'NETWORK_ERROR' || error.code === 'ERR_NETWORK' || !navigator.onLine) {
       return getBrowserSpecificErrorMessage('network_error');
     }
-    
-    // Handle connection timeout
+
     if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-      return 'Connection timeout. Please check your internet connection and try again.';
+      return 'Connection timeout. Please check your connection.';
     }
-    
-    // Handle offline status
-    if (!navigator.onLine) {
-      return getBrowserSpecificErrorMessage('network_error');
-    }
-    
-    // Handle specific error messages with browser context
+
     if (error.message) {
-      // PDF validation errors
-      if (error.message.includes('not accessible')) {
-        return getBrowserSpecificErrorMessage('file_not_accessible');
-      }
-      
-      // Download blocking errors
+      if (error.message.includes('not accessible')) return getBrowserSpecificErrorMessage('file_not_accessible');
       if (error.message.includes('browser allows downloads') || error.message.includes('Download failed')) {
         return getBrowserSpecificErrorMessage('download_blocked');
       }
-      
-      // Popup blocking errors
-      if (error.message.includes('Popup blocked')) {
-        return getBrowserSpecificErrorMessage('popup_blocked');
-      }
-      
-      // Invalid response format
-      if (error.message.includes('Invalid response format')) {
-        return 'Received invalid data from server. Please try again or contact support.';
-      }
-      
-      // File access errors
-      if (error.message.includes('File not accessible')) {
-        return getBrowserSpecificErrorMessage('file_not_accessible');
-      }
-      
+      if (error.message.includes('Popup blocked')) return getBrowserSpecificErrorMessage('popup_blocked');
       return error.message;
     }
-    
+
     return 'An unexpected error occurred. Please try again.';
   };
 
   const handleDownload = async () => {
-    setDownloadState({
-      loading: true,
-      error: null,
-      success: false
-    });
+    setDownloadState({ loading: true, error: null, success: false });
 
     try {
-      // Fetch the latest resume from API
       const response = await getLatestResume();
-      
-      // Validate API response structure
-      if (!response.data || !response.data.data || !response.data.data.pdfUrl) {
-        throw new Error('Invalid response format. Please try again.');
+
+      if (!response.data?.data?.pdfUrl) {
+        throw new Error('Invalid response format.');
       }
 
       const pdfUrl = response.data.data.pdfUrl;
-      
-      // Validate PDF URL accessibility
       const isValidUrl = await validatePdfUrl(pdfUrl);
+
       if (!isValidUrl) {
-        throw new Error('Resume file is not accessible. Please try again later.');
+        throw new Error('Resume file is not accessible.');
       }
 
-      // Generate appropriate filename
       const filename = generateResumeFilename('resume');
-      
-      // Attempt to download the file
       const downloadSuccess = await downloadFile(pdfUrl, filename);
-      
-      if (downloadSuccess) {
-        setDownloadState({
-          loading: false,
-          error: null,
-          success: true
-        });
 
-        // Auto-dismiss success message after 3 seconds
-        setTimeout(() => {
-          setDownloadState(prev => ({
-            ...prev,
-            success: false
-          }));
-        }, 3000);
+      if (downloadSuccess) {
+        setDownloadState({ loading: false, error: null, success: true });
+        setTimeout(() => setDownloadState(prev => ({ ...prev, success: false })), 3000);
       } else {
-        throw new Error('Download failed. Please try again or check if your browser allows downloads.');
+        throw new Error('Download failed. Please try again.');
       }
     } catch (error) {
       console.error('Resume download error:', error);
-      
-      const errorMessage = getErrorMessage(error);
-
-      setDownloadState({
-        loading: false,
-        error: errorMessage,
-        success: false
-      });
+      setDownloadState({ loading: false, error: getErrorMessage(error), success: false });
     }
   };
 
   const handleRetry = () => {
-    // Clear error state and retry download
-    setDownloadState({
-      loading: false,
-      error: null,
-      success: false
-    });
-    
-    // Small delay to provide visual feedback
-    setTimeout(() => {
-      handleDownload();
-    }, 100);
+    setDownloadState({ loading: false, error: null, success: false });
+    setTimeout(() => handleDownload(), 100);
   };
 
   const handleAlternativeDownload = async () => {
     const browserCapabilities = detectBrowserCapabilities();
-    
-    setDownloadState({
-      loading: true,
-      error: null,
-      success: false
-    });
+    setDownloadState({ loading: true, error: null, success: false });
 
     try {
-      // Fetch the latest resume from API
       const response = await getLatestResume();
-      
-      if (!response.data || !response.data.data || !response.data.data.pdfUrl) {
-        throw new Error('Invalid response format. Please try again.');
+
+      if (!response.data?.data?.pdfUrl) {
+        throw new Error('Invalid response format.');
       }
 
       const pdfUrl = response.data.data.pdfUrl;
-      
-      // For iOS or when download is blocked, always open in new tab
+
       if (browserCapabilities.isIOS || browserCapabilities.recommendedMethod === 'newTab') {
         const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
-        
+
         if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
           throw new Error('Popup blocked by browser');
         }
-        
-        setDownloadState({
-          loading: false,
-          error: null,
-          success: true
-        });
 
-        // Auto-dismiss success message after 3 seconds
-        setTimeout(() => {
-          setDownloadState(prev => ({
-            ...prev,
-            success: false
-          }));
-        }, 3000);
+        setDownloadState({ loading: false, error: null, success: true });
+        setTimeout(() => setDownloadState(prev => ({ ...prev, success: false })), 3000);
       } else {
-        // Try regular download
         await handleDownload();
       }
     } catch (error) {
       console.error('Alternative download error:', error);
-      
-      const errorMessage = getErrorMessage(error);
-      setDownloadState({
-        loading: false,
-        error: errorMessage,
-        success: false
-      });
+      setDownloadState({ loading: false, error: getErrorMessage(error), success: false });
     }
   };
 
   return (
-    <section className={`py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 ${className}`} id="resume">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">Resume</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+    <section className={`py-24 bg-slate-950 ${className}`} id="resume">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="mb-16 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 section-title">
+            Resume
+          </h2>
+          <div className="w-12 h-0.5 bg-accent"></div>
         </div>
 
-        <div className="flex justify-center">
-          <div className="glass rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-700/30 max-w-md w-full mx-4 hover-lift transition-all duration-300">
-            <div className="text-center space-y-6">
-              <div className="text-5xl sm:text-6xl mb-4" aria-hidden="true">📄</div>
-              <h3 className="text-xl sm:text-2xl font-bold text-cyan-400 mb-4">Get My Resume</h3>
-              <p className="text-slate-200 text-base sm:text-lg leading-relaxed mb-6">
-                Download my latest resume to learn more about my experience and skills.
-              </p>
+        <div className="animate-fade-in max-w-md">
+          <p className="text-slate-400 mb-6">
+            Download my resume to learn more about my experience and skills.
+          </p>
 
-              {/* Error Display */}
-              {downloadState.error && (
-                <div 
-                  id="download-error"
-                  className="mb-6 p-4 bg-red-900/20 text-red-300 rounded-lg border border-red-500/30 backdrop-blur-sm animate-fade-in"
-                  role="alert"
-                  aria-live="polite"
+          {downloadState.error && (
+            <div className="mb-6 p-4 bg-red-950/50 border border-red-900/50 rounded-lg" role="alert">
+              <p className="text-red-400 text-sm mb-3">{downloadState.error}</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleRetry}
+                  className="px-3 py-1.5 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition-colors"
                 >
-                  <div className="flex items-start space-x-3">
-                    <div className="text-red-400 text-xl flex-shrink-0" aria-hidden="true">⚠️</div>
-                    <div className="flex-1 min-w-0">
-                      <p className="mb-3 text-sm leading-relaxed break-words">{downloadState.error}</p>
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <button
-                          onClick={handleRetry}
-                          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200 text-sm font-medium hover:shadow-lg active:scale-95"
-                          aria-label="Retry downloading resume"
-                        >
-                          <span aria-hidden="true">🔄</span> Try Again
-                        </button>
-                        {(downloadState.error.includes('browser') || downloadState.error.includes('blocked') || downloadState.error.includes('iOS')) && (
-                          <button
-                            onClick={handleAlternativeDownload}
-                            disabled={downloadState.loading}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg active:scale-95"
-                            aria-label="Open resume in new tab as alternative"
-                          >
-                            <span aria-hidden="true">📂</span> Open in New Tab
-                          </button>
-                        )}
-                      </div>
-                      {downloadState.error.includes('internet') && (
-                        <p className="mt-2 text-xs text-red-400">
-                          <span aria-hidden="true">💡</span> Tip: Check your internet connection and try again
-                        </p>
-                      )}
-                      {downloadState.error.includes('contact support') && (
-                        <p className="mt-2 text-xs text-red-400">
-                          <span aria-hidden="true">💡</span> If this problem persists, please contact the site administrator
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Success Message */}
-              {downloadState.success && (
-                <div className="mb-6 p-4 bg-green-900/20 text-green-300 rounded-lg border border-green-500/30 backdrop-blur-sm animate-fade-in">
-                  <div className="flex items-center space-x-3">
-                    <div className="text-green-400 text-xl">✅</div>
-                    <span className="text-sm font-medium">Resume downloaded successfully!</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Download Button */}
-              <button
-                onClick={handleDownload}
-                disabled={downloadState.loading}
-                className={`
-                  w-full px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform
-                  focus:outline-none focus:ring-4 focus:ring-cyan-500/50 focus:ring-offset-2 focus:ring-offset-slate-900
-                  ${downloadState.loading 
-                    ? 'bg-slate-600 text-slate-300 cursor-not-allowed opacity-75' 
-                    : 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25 active:scale-95'
-                  }
-                `}
-                aria-label={downloadState.loading ? 'Downloading resume...' : 'Download resume PDF'}
-                aria-describedby={downloadState.error ? 'download-error' : undefined}
-              >
-                {downloadState.loading ? (
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" aria-hidden="true"></div>
-                    <span>Downloading...</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center space-x-2">
-                    <span aria-hidden="true">📥</span>
-                    <span>{buttonText}</span>
-                  </div>
+                  Try Again
+                </button>
+                {(downloadState.error.includes('browser') || downloadState.error.includes('blocked')) && (
+                  <button
+                    onClick={handleAlternativeDownload}
+                    disabled={downloadState.loading}
+                    className="px-3 py-1.5 bg-slate-700 text-white rounded text-sm hover:bg-slate-600 transition-colors disabled:opacity-50"
+                  >
+                    Open in New Tab
+                  </button>
                 )}
-              </button>
+              </div>
             </div>
-          </div>
+          )}
+
+          {downloadState.success && (
+            <div className="mb-6 p-4 bg-green-950/50 border border-green-900/50 rounded-lg">
+              <p className="text-green-400 text-sm">Resume downloaded successfully!</p>
+            </div>
+          )}
+
+          <button
+            onClick={handleDownload}
+            disabled={downloadState.loading}
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              downloadState.loading
+                ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                : 'bg-accent text-slate-900 hover:opacity-90'
+            }`}
+          >
+            {downloadState.loading ? (
+              <span className="flex items-center gap-2">
+                <span className="animate-spin h-4 w-4 border-2 border-slate-400 border-t-transparent rounded-full"></span>
+                Downloading...
+              </span>
+            ) : (
+              buttonText
+            )}
+          </button>
         </div>
       </div>
     </section>
