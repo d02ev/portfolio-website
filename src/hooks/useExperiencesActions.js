@@ -13,7 +13,7 @@ export function useExperiencesActions() {
       setError(null);
       setLoading(true);
       const res = await fetchExperiences();
-      setExperiences(res.data.data);
+      setExperiences(res.data);
     } catch (err) {
       setError(err?.response?.data?.message || err?.message || 'Failed to fetch experiences.');
     } finally {

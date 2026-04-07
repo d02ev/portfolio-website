@@ -1,16 +1,29 @@
-import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const apiFetch = async (endpoint, options = {}) => {
+  const url = `${BASE_URL}${endpoint}`;
 
-// Public API functions for fetching data (no authentication required)
-export const fetchProjects = () => api.get('/project');
-export const fetchExperiences = () => api.get('/experience');
-export const fetchAbout = () => api.get('/about');
-export const getLatestResume = () => api.get('/resume/latest');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Api-Key': import.meta.env.VITE_API_KEY,
+      ...options.headers,
+    },
+    ...options,
+  };
 
-export default api;
+  const response = await fetch(url, config);
+
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+};
+
+export const fetchProjects = () => apiFetch('/project');
+export const fetchExperiences = () => apiFetch('/experience');
+export const fetchAbout = () => apiFetch('/about');
+export const getLatestResume = () => apiFetch('/resume/latest');
+
+export default apiFetch;

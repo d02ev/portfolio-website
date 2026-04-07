@@ -12,7 +12,7 @@ export function useAboutActions() {
       setError(null);
       setLoading(true);
       const res = await fetchAbout();
-      setAbout(res.data.data);
+      setAbout(res.data);
     } catch (err) {
       setError(err?.response?.data?.message || err?.message || 'Failed to fetch about info.');
     } finally {
